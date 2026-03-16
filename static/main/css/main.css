@@ -1,0 +1,356 @@
+/* Используем шрифт из Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Основной стиль */
+body {
+    background: url("{% static 'main/img/decorative-bg.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s ease; /* Плавный переход фона */
+}
+
+/* Стиль для сайдбара */
+aside {
+    float: left;
+    background: #2c3e50;
+    width: 20%;
+    padding: 2rem;
+    height: 100vh;
+    color: #ecf0f1;
+    border-right: 5px solid #34495e;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+    aside {
+        width: 100%; /* Сайдбар занимает всю ширину на мобильных устройствах */
+        height: auto; /* Убираем фиксированную высоту */
+        border-right: none;
+        padding: 1rem;
+    }
+
+    main {
+        margin-left: 0; /* Убираем отступ с левой стороны */
+    }
+
+    .gallery {
+        grid-template-columns: 1fr; /* Сделать галерею на одну колонку */
+    }
+
+    h1 {
+        font-size: 2rem; /* Уменьшаем размер заголовков на мобильных */
+    }
+}
+
+
+/* Логотип и название */
+aside img {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+aside img:hover {
+    transform: scale(1.1); /* Легкое увеличение при наведении */
+}
+
+aside .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ecf0f1;
+    display: inline-block;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+/* Светло-оранжевые буквы E и P */
+aside .logo .highlight {
+    color: #ff8c00; /* Светло-оранжевый цвет */
+}
+
+/* Добавление блока с автором снизу */
+.author-info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    color: #ecf0f1;
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.author-info:hover {
+    opacity: 1; /* Увеличение видимости при наведении */
+}
+
+.author-info i {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.author-info i:hover {
+    transform: rotate(15deg); /* Легкая анимация вращения иконки */
+}
+
+.author-info span {
+    font-weight: bold;
+}
+
+/* Стиль для заголовков и блоков навигации */
+aside h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ecf0f1;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+aside h3:hover {
+    color: #16a085; /* Подсветка заголовков */
+}
+
+aside ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+/* Стиль для кнопок в сайдбаре */
+aside ul a {
+    text-decoration: none;
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#order-btn.active {
+    background-color: #27ae60; /* Зеленый цвет */
+    color: white;
+}
+
+#portfolio-btn.active {
+    background-color: #16a085; /* Стандартный активный цвет */
+    color: white;
+}
+
+/* Форма для заказа */
+#order-form {
+    margin-top: 20px;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#order-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+#order-form label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#order-form input, #order-form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#order-form button {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+#order-form button:hover {
+    background-color: #2ecc71;
+}
+
+
+
+aside ul a:hover {
+    background: #34495e;
+    padding-left: 15px; /* Плавное добавление отступа */
+    transform: scale(1.05); /* Плавное увеличение */
+}
+
+
+aside ul a.active {
+    background: #16a085;
+}
+
+/* Стиль для основного контента */
+main {
+    margin-left: 20%;
+    padding: 2rem;
+    transition: margin-left 0.5s ease; /* Плавное движение контента */
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+p {
+    font-size: 1.2rem;
+    color: #34495e;
+}
+
+/* Картинки и галерея */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery img:hover {
+    transform: scale(1.05); /* Увеличение картинок */
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Добавление тени */
+}
+
+/* Мобильные устройства */
+@media screen and (max-width: 768px) {
+    aside {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        margin-bottom: 20px;
+    }
+
+    main {
+        margin-left: 0;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
+/* Стиль для блока услуг */
+.services {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.services h2 {
+    font-size: 2rem;
+    color: #34495e;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.services p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+}
+
+/* Контейнер для карточек */
+.service-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* Каждая карточка */
+.service-card {
+    width: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    text-align: center;
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.service-card:hover img {
+    transform: scale(1.1);
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    color: #34495e;
+    margin: 15px 0;
+}
+
+.service-card p {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+/* Убедитесь, что карточки сдвинуты вниз по умолчанию */
+.service-card {
+    transform: translateY(30px); /* Начальный сдвиг вниз */
+    opacity: 0; /* Изначально невидимые */
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* После анимации элементы должны быть видимыми и без сдвига */
+.service-card[data-aos="fade-up"].aos-animate {
+    transform: translateY(0); /* Возвращаем на место */
+    opacity: 1;
+}
+
+
+
+
+
+/* Мобильные устройства */
+@media screen and (max-width: 768px) {
+    .service-cards {
+        flex-direction: column;
+    }
+
+    .service-card {
+        width: 90%;
+        margin: 10px auto;
+    }
+}
