@@ -61,7 +61,20 @@ function openModal(categoryId){
     fetch(`/get-category-izdeliya/${categoryId}`)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         document.getElementById('categoryNameModal').textContent = data['category_name'];
+
+        let res = '';
+        if (data['izdeliya'].length == 0){
+        res = "Нет работ в портфолио";
+        }
+        else{
+        res = '<div class="row gap-2 justify-content-center">';
+        for(let i = 0; i < data['izdeliya'].length;i++){
+               res += '<div class="col-4 service-card izdelie-card" style="width: 180px;"><img src="'+data['izdeliya'][i]['img_finish']+'"  height="200px" style="object-fit: cover;width: 100%!important "/><h3>'+data['izdeliya'][i]['title']+'</h3><p>'+data['izdeliya'][i]['description']+'</p> </div>';
+        }
+        res += '</div>';}
+        document.getElementById('modal-izdelia').innerHTML = res;
+
+
     });
 }

@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import Portfolio, Category
 from django.http import JsonResponse
-from django.contrib.auth import logout, login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import logout, login
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
 
 def index(request):
     categories = Category.objects.all().order_by('-order')
@@ -13,6 +13,11 @@ def index(request):
 
 def order_form(request):
     return render(request, 'order-form.html')
+
+
+def about(request):
+    return render(request, 'about.html')
+
 
 def login_our(request):
     if request.method == "POST":
@@ -25,6 +30,7 @@ def login_our(request):
         messages.error(request, 'Неверный логин или пароль.')
         return redirect('home')
     return render(request, 'login.html', {'form': AuthenticationForm()})
+
 
 def logout_our(request):
     messages.success(request, 'Вы вышли из аккаунта.')
@@ -55,6 +61,7 @@ def get_category_portfolio(request, category_id):
             "id":          i.id,
             "title":       i.title,
             "img":         i.img.url,
+            "img_finish":  i.img_finish.url,
             "description": i.description,
             "dead_line":   i.dead_line,
         })
