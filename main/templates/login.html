@@ -1,34 +1,45 @@
 {% extends "base.html" %}
+{% block title %}Вход{% endblock %}
 
 {% block content %}
+<main>
+    <div class="auth-page">
+        <div class="auth-card">
 
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-header">
-                <h3>Вход</h3>
+            <div class="auth-card__header">
+                <span class="auth-card__icon"><i class="fa-solid fa-right-to-bracket"></i></span>
+                <h2>Вход в аккаунт</h2>
             </div>
-            <div class="card-body">
+
+            <div class="auth-card__body">
+                {% if form.errors %}
+                <div class="auth-card__error">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Неправильный логин или пароль
+                </div>
+                {% endif %}
+
                 <form method="post">
                     {% csrf_token %}
-                    {% if form.errors %}
-                        <div class="alert alert-danger">
-                            Неправильное имя пользователя или пароль
-                        </div>
-                    {% endif %}
-                    <div class="mb-3">
-                        <label class="form-label">Логин</label>
-                        <input type="text" name="{{form.username.name}}" id="" class="form-control" required>
+                    <div class="auth-card__field">
+                        <label>Логин</label>
+                        <input type="text" name="{{ form.username.name }}" class="auth-card__input" placeholder="Введите логин" required>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Пароль</label>
-                        <input type="password" name="{{form.password.name}}" id="" class="form-control" required>
+                    <div class="auth-card__field">
+                        <label>Пароль</label>
+                        <input type="password" name="{{ form.password.name }}" class="auth-card__input" placeholder="Введите пароль" required>
                     </div>
-                    <button type="submit" class = "btn btn-primary">Войти</button>
+                    <button type="submit" class="auth-card__submit">
+                        <i class="fa-solid fa-right-to-bracket"></i> Войти
+                    </button>
                 </form>
+
+                <div class="auth-card__switch">
+                    Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a>
+                </div>
             </div>
+
         </div>
     </div>
-</div>
-
+</main>
 {% endblock %}

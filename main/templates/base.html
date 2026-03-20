@@ -8,107 +8,119 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.6.0/css/all.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
     {% block extra_css %}{% endblock %}
 </head>
-
 <body>
+
 <aside>
-    <img src="{% static 'main/img/bird.svg' %}" alt="Лого">
+    <img src="{% static 'main/img/bird.svg' %}" alt="logo">
     <span class="logo">
         <span class="highlight">E</span>mbird<span class="highlight">P</span>rojects
     </span>
-
     <ul>
-        <!-- Кнопка Портфолио -->
         <li>
-        <a href="/" class="{% if request.path == '/' %}active{% endif %}">
-            <i class="fa-solid fa-star"></i> Портфолио
-        </a>
-</li>
-        <!-- Кнопка Заказать вышивку, которая ведет на страницу с формой -->
-        <li>
-            <a href="{% url 'order_form' %}" class="cta-button {% if request.path == '/order_form' %}active{% endif %}">
-                <i class="fa fa-pencil-alt"></i> Заказать вышивку
+            <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+                <i class="fa-solid fa-star"></i> Главная
             </a>
         </li>
-
-        <!-- Блок быстрых контактов -->
+        <li>
+            <a href="{% url 'order_form' %}" class="cta-button {% if request.path == '/order_form' %}active{% endif %}">
+                <i class="fa fa-pencil-alt"></i> Заказать
+            </a>
+        </li>
         <div class="contact-block">
             <a href="https://t.me/Cart00nTG" target="_blank" class="contact-link">
                 <i class="fa-solid fa-paper-plane"></i> Telegram
             </a>
         </div>
-
-        <li><a href="#">
-            <i class="fa-solid fa-handshake"></i> Сотрудничество
-        </a></li>
+        <li>
+            <a href="#">
+                <i class="fa-solid fa-handshake"></i> О нас
+            </a>
+        </li>
 
         {% if user.is_authenticated %}
-
         <li>
-            <a href="/logout" style="background-color: #DC143C">
-            <i class="fa-regular fa-square-caret-left"></i> Выйти
-        </a>
-        <!--<form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-
-            <button type="submit" class="btn btn-danger"> <i class="fa-regular fa-square-caret-left"></i> Выйти</button>
-        </form>-->
-            </li>
+            <a href="/logout/" style="background-color: #DC143C;">
+                <i class="fa-regular fa-square-caret-left"></i> Выйти
+            </a>
+        </li>
         {% else %}
-        <li><a href="{% url 'login' %}"  class="{% if request.path == '/login/' %}active{% endif %}">
-            <i class="fa-solid fa-right-to-bracket"></i> Войти
-        </a>
-            </li>
-          <li><a href="{% url 'register' %}" class="{% if request.path == '/register/' %}active{% endif %}">
-            <i class="fa-solid fa-right-to-bracket"></i> Зарегистрироваться
-        </a>
-            </li>
+        <li>
+            <button class="auth-btn" onclick="openAuthModal()">
+                <i class="fa-solid fa-right-to-bracket"></i> Вход / Регистрация
+            </button>
+        </li>
         {% endif %}
     </ul>
 </aside>
 
+<!-- Toast уведомления -->
+{% if messages %}
+<div style="position:fixed;top:1rem;right:1rem;z-index:99999;min-width:260px;">
+    {% for message in messages %}
+    <div class="auth-toast auth-toast--{{ message.tags }}">
+        <i class="fa-solid {% if message.tags == 'success' %}fa-circle-check{% else %}fa-circle-exclamation{% endif %}"></i>
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 {% block content %}{% endblock %}
 
-
-<!-- Подключаем JS для анимаций -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init(); // Инициализация анимаций
-</script>
-
-<!-- Подключение внешнего JavaScript файла -->
-<script src="{% static 'main/js/main.js' %}"></script>
-
-<script>
-    AOS.init({
-        duration: 1000,  // Длительность анимации (1 секунда)
-        delay: 0,        // Задержка перед началом анимации
-        once: true       // Анимация выполняется только один раз при скролле
-    });
-</script>
-
-{% block extra_js %}{% endblock %}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Modal open category -->
-<div class="modal fade" id="openModalPortfolio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="categoryNameModal">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div id="authModal" class="auth-overlay" onclick="closeAuthOutside(event)">
+    <div class="auth-dialog">
+        <div class="auth-header">
+            <h2><i class="fa-solid fa-user" style="margin-right:8px;color:#ff8c00"></i>Аккаунт</h2>
+            <button class="auth-close" onclick="closeAuthModal()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="auth-body" style="display:flex;flex-direction:column;gap:1rem;">
+            <a href="{% url 'login' %}" class="auth-submit" style="text-align:center;text-decoration:none;">
+                <i class="fa-solid fa-right-to-bracket"></i> Войти
+            </a>
+            <a href="{% url 'register' %}" class="auth-submit" style="text-align:center;text-decoration:none;background:#2c3e50;">
+                <i class="fa-solid fa-user-plus"></i> Зарегистрироваться
+            </a>
         </div>
     </div>
 </div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="{% static 'main/js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function openAuthModal() {
+        document.getElementById('authModal').classList.add('auth-overlay--open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeAuthModal() {
+        document.getElementById('authModal').classList.remove('auth-overlay--open');
+        document.body.style.overflow = '';
+    }
+    function closeAuthOutside(e) {
+        if (e.target.id === 'authModal') closeAuthModal();
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAuthModal();
+    });
+
+    // Автоскрытие toast через 4 секунды
+    setTimeout(function() {
+        document.querySelectorAll('.auth-toast').forEach(function(t) {
+            t.style.transition = 'opacity 0.5s ease';
+            t.style.opacity = '0';
+            setTimeout(function() { t.remove(); }, 500);
+        });
+    }, 4000);
+</script>
+
+{% block extra_js %}{% endblock %}
 </body>
 </html>

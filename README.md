@@ -9,7 +9,7 @@ python -m venv venv
 ```
 3. Активация вирт. окр.
 ```bash
-venv\scripts\activate
+.venv\scripts\activate
 ```
 4. Установка зависимостей проекта
 ```bash
