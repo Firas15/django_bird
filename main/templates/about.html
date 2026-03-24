@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}О нас{% endblock %}
+
+{% block content %}
+<main>
+    <div class="about-page">
+
+        <!-- Герой блок с фото -->
+        <div class="about-hero">
+            <img src="{% static 'main/img/machine.jpg' %}" alt="Машинка для вышивки" class="about-hero__img">
+            <div class="about-hero__overlay">
+                <span class="about-hero__tag"><i class="fa-solid fa-scissors"></i> Машинная работа</span>
+                <h1 class="about-hero__title">EmBird Projects</h1>
+                <p class="about-hero__sub">Вышивка с душой — с 2025 года</p>
+            </div>
+        </div>
+                <!-- Услуги -->
+        <div class="about-section-title" data-aos="fade-up">
+            <span class="about-section-title__line"></span>
+            <h2>Что мы предлагаем</h2>
+            <span class="about-section-title__line"></span>
+        </div>
+
+        <div class="about-services" data-aos="fade-up">
+            <div class="about-service">
+                <div class="about-service__icon"><i class="fa-solid fa-image"></i></div>
+                <h4>Вышивка по фото</h4>
+                <p>Превращаем ваше фото в уникальную вышивку. Портреты людей, животных, любимых персонажей — точная передача деталей и цветов.</p>
+            </div>
+            <div class="about-service">
+                <div class="about-service__icon"><i class="fa-solid fa-shirt"></i></div>
+                <h4>Восстановление одежды</h4>
+                <p>Скрываем потёртости, дырки и дефекты с помощью вышивки. Вещь получает новую жизнь и становится ещё более уникальной.</p>
+            </div>
+            <div class="about-service">
+                <div class="about-service__icon"><i class="fa-solid fa-pen-nib"></i></div>
+                <h4>Персональный дизайн</h4>
+                <p>Создаём вышивку по вашему эскизу или готовому дизайну. Логотипы, монограммы, орнаменты — любая сложность.</p>
+            </div>
+        </div>
+
+        <!-- Розница и опт -->
+        <div class="about-section-title" data-aos="fade-up">
+            <span class="about-section-title__line"></span>
+            <h2>Для всех форматов</h2>
+            <span class="about-section-title__line"></span>
+        </div>
+
+        <div class="about-formats" data-aos="fade-up">
+            <div class="about-format about-format--retail">
+                <div class="about-format__header">
+                    <i class="fa-solid fa-user"></i>
+                    <h3>Розница</h3>
+                </div>
+                <p>Работаем с частными клиентами — один заказ, одна вещь, один уникальный результат. Индивидуальный подход к каждому проекту, обсуждение деталей и пожеланий.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Любое количество — хоть одна вещь</li>
+                    <li><i class="fa-solid fa-check"></i> Персональная консультация</li>
+                    <li><i class="fa-solid fa-check"></i> Полное сопровождение заказа</li>
+                </ul>
+            </div>
+            <div class="about-format about-format--wholesale">
+                <div class="about-format__header">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                    <h3>Опт</h3>
+                </div>
+                <p>Сотрудничаем с компаниями и предпринимателями. Нанесение логотипов на корпоративную одежду, брендирование изделий, серийное производство.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check"></i> Скидки при больших объёмах</li>
+                    <li><i class="fa-solid fa-check"></i> Фирменная символика и логотипы</li>
+                    <li><i class="fa-solid fa-check"></i> Гибкие условия сотрудничества</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <div class="about-content">
+
+            <div class="about-card" data-aos="fade-up">
+                <div class="about-card__icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="about-card__text">
+                    <h3>Привет, я Фирас!</h3>
+                    <p>Я занимаюсь вышивкой и предлагаю уникальные работы — превращаю фотографии и готовые дизайны в искусно вышитые произведения. Каждый проект я подбираю индивидуально, ориентируясь на ваши предпочтения и потребности.</p>
+                </div>
+            </div>
+
+            <div class="about-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="about-card__icon">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <div class="about-card__text">
+                    <h3>Оборудование</h3>
+                    <p>Работаю на профессиональной вышивальной машине, которая позволяет точно воспроизводить сложные дизайны. Использую только качественные нитки и материалы — результат служит долго и не теряет вид.</p>
+                </div>
+            </div>
+
+            <div class="about-stats" data-aos="fade-up" data-aos-delay="200">
+                <div class="about-stat">
+                    <span class="about-stat__num">50+</span>
+                    <span class="about-stat__label">выполненных работ</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat__num">3</span>
+                    <span class="about-stat__label">категории услуг</span>
+                </div>
+                <div class="about-stat">
+                    <span class="about-stat__num">100%</span>
+                    <span class="about-stat__label">довольных клиентов</span>
+                </div>
+            </div>
+
+            <div class="about-cta" data-aos="fade-up" data-aos-delay="300">
+                <a href="{% url 'order_form' %}" class="about-cta__btn">
+                    <i class="fa-solid fa-pencil"></i> Заказать вышивку
+                </a>
+                <a href="https://t.me/Cart00nTG" target="_blank" class="about-cta__btn about-cta__btn--tg">
+                    <i class="fa-solid fa-paper-plane"></i> Написать в Telegram
+                </a>
+            </div>
+
+        </div>
+    </div>
+</main>
+{% endblock %}
