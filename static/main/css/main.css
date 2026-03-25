@@ -164,6 +164,7 @@ p  { font-size: 1.2rem; color: #34495e; }
 ═══════════════════════════════════════════════ */
 
 .profile_panel{
+    border-radius: 15px;
     position: absolute;
     top: 15px;
     right: 20px;
@@ -550,7 +551,7 @@ p  { font-size: 1.2rem; color: #34495e; }
     line-height: 1.6;
 }
 .about-card2 {
-margin-top: 0px;
+margin-top: 130px;
 }
 /* Статистика */
 .about-stats {
