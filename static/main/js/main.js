@@ -33,6 +33,7 @@ const portfolioBtn = document.getElementById('portfolio-btn');
 const orderForm = document.getElementById('order-form');
 
 // Обработчик для кнопки "Заказать вышивку"
+if(orderBtn!=undefined){
 orderBtn.addEventListener('click', function (e) {
     e.preventDefault(); // Останавливаем стандартное поведение ссылки
 
@@ -43,7 +44,8 @@ orderBtn.addEventListener('click', function (e) {
     // Показываем форму для заказа
     orderForm.style.display = 'block';
 });
-
+}
+if(portfolioBtn!=undefined){
 // Обработчик для кнопки "Портфолио"
 portfolioBtn.addEventListener('click', function (e) {
     e.preventDefault(); // Останавливаем стандартное поведение ссылки
@@ -55,7 +57,7 @@ portfolioBtn.addEventListener('click', function (e) {
     // Прячем форму для заказа
     orderForm.style.display = 'none';
 });
-
+}
 
 function openModal(categoryId){
     fetch(`/get-category-izdeliya/${categoryId}`)
@@ -70,11 +72,21 @@ function openModal(categoryId){
         else{
         res = '<div class="row gap-2 justify-content-center">';
         for(let i = 0; i < data['izdeliya'].length;i++){
-               res += '<div class="col-4 service-card izdelie-card" style="width: 180px;"><img src="'+data['izdeliya'][i]['img_finish']+'"  height="200px" style="object-fit: cover;width: 100%!important "/><h3>'+data['izdeliya'][i]['title']+'</h3><p>'+data['izdeliya'][i]['description']+'</p> <p>'+data['izdeliya'][i]['dead_line']+' дн.</p></div>';
+               res += '<div data-bs-toggle="modal" data-bs-target="#openModalDetail"  class="col-4 service-card izdelie-card" style="width: 180px;"  onclick="clickCard(\''+data['izdeliya'][i]['title']+'\',\''+data['izdeliya'][i]['img']+'\',\''+data['izdeliya'][i]['img_finish']+'\')"><img src="'+data['izdeliya'][i]['img_finish']+'"  height="200px" style="object-fit: cover;width: 100%!important "/><h3>'+data['izdeliya'][i]['title']+'</h3><p>'+data['izdeliya'][i]['description']+'</p> <p>'+data['izdeliya'][i]['dead_line']+' дн.</p></div>';
         }
         res += '</div>';}
         document.getElementById('modal-izdelia').innerHTML = res;
 
 
     });
+}
+
+
+function clickCard(title,img,img_finish){
+    document.getElementById("openModalDetailTitle").innerHTML=title;
+    let res = '<div class="row gap-2 justify-content-center">';
+    res += '<div class="col-6 service-card izdelie-card" style="width: 300px;" "><img height="200px" style="object-fit: cover;width: 100%!important " src="'+img+'" ><h3>До выполнения работы</h3></div>';
+    res += '<div class="col-6 service-card izdelie-card" style="width: 300px;" "><img height="200px" style="object-fit: cover;width: 100%!important " src="'+img_finish+'" > <h3>Результат</h3></div>';
+    res += '</div>';
+    document.getElementById("modal-body-image").innerHTML=res;
 }

@@ -16,7 +16,7 @@
         <div class="service-cards">
             <!-- Карточка 1: Вышивка по фото -->
             {% for i in categories %}
-            <div class="service-card" data-aos="fade-up" onclick="openModal('{{i.id}}')" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#openModalPortfolio">
+            <div class="service-card modal-service-card" data-aos="fade-up" onclick="openModal('{{i.id}}')" data-aos-delay="100" data-bs-toggle="modal" data-bs-target="#openModalPortfolio">
                 <img src="{{i.img.url}}" alt="{{i.name}}">
                 <h3>{{i.name}}</h3>
                 <p>{{i.description}}</p>

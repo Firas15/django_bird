@@ -132,6 +132,13 @@ p  { font-size: 1.2rem; color: #34495e; }
 .services h2 { font-size: 2rem; color: #34495e; font-weight: bold; margin-bottom: 20px; }
 .services p  { font-size: 1.2rem; color: #7f8c8d;}
 
+.modal-service-card {
+    margin-top: -50px!important;
+}
+
+
+
+
 .service-cards { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
 
 .service-card {
