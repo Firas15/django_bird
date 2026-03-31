@@ -85,8 +85,22 @@ function openModal(categoryId){
 function clickCard(title,img,img_finish){
     document.getElementById("openModalDetailTitle").innerHTML=title;
     let res = '<div class="row gap-2 justify-content-center">';
-    res += '<div class="col-6 service-card izdelie-card" style="width: 300px;" "><img height="200px" style="object-fit: cover;width: 100%!important " src="'+img+'" ><h3>До выполнения работы</h3></div>';
-    res += '<div class="col-6 service-card izdelie-card" style="width: 300px;" "><img height="200px" style="object-fit: cover;width: 100%!important " src="'+img_finish+'" > <h3>Результат</h3></div>';
+    res += '<div class="col-6 service-card izdelie-card" style="width: 300px;" "><img onclick="click_image(\''+img+'\')" id="image_card" height="200px" style="object-fit: cover;width: 100%!important " src="'+img+'" ><h3>До выполнения работы</h3></div>';
+    res += '<div class="col-6 service-card izdelie-card" style="width: 300px;" "><img onclick="click_image(\''+img_finish+'\')" id="image_card" height="200px" style="object-fit: cover;width: 100%!important " src="'+img_finish+'" > <h3>Результат</h3></div>';
     res += '</div>';
     document.getElementById("modal-body-image").innerHTML=res;
 }
+
+
+function click_image(url){
+document.getElementById("img_detail").setAttribute("src",url);
+document.getElementById("photo_block").style.display="flex";
+
+}
+let img = document.getElementById("img_detail");
+document.getElementById("photo_block").addEventListener("click",function(event){
+if (event.target===img){
+return;
+}
+document.getElementById("photo_block").style.display="none";
+});
