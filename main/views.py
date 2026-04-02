@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth import logout, login
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .forms import Order_form
 
 
 def index(request):
@@ -12,7 +13,9 @@ def index(request):
 
 
 def order_form(request):
-    return render(request, 'order-form.html')
+    form = Order_form()
+
+    return render(request, 'order-form.html', {'form': form})
 
 
 def about(request):
