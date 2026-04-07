@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Portfolio, Category
+from .models import Portfolio, Category, Order
 
 
 admin.site.register(Category)
@@ -7,3 +7,7 @@ admin.site.register(Category)
 @admin.register(Portfolio)
 class PortfolioAdmin(admin.ModelAdmin):
     list_display = ("category","title","dead_line")
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ("name","phone","data")

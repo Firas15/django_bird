@@ -13,9 +13,15 @@ def index(request):
 
 
 def order_form(request):
-    form = Order_form()
+    if request.method == "POST":
+        form = Order_form(request.POST)
+        if form.is_valid():
+            order = form.save()
+            return redirect(f"/accept_order/{order.id}")
+    else:
+        form = Order_form()
 
-    return render(request, 'order-form.html', {'form': form})
+        return render(request, 'order-form.html', {'form': form})
 
 
 def about(request):
@@ -33,6 +39,11 @@ def login_our(request):
         messages.error(request, 'Неверный логин или пароль.')
         return redirect('home')
     return render(request, 'login.html', {'form': AuthenticationForm()})
+
+def accept_order(request, number):
+    return render(request,"accept_order.html",{'number':number})
+
+
 
 
 def logout_our(request):

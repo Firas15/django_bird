@@ -1,0 +1,525 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}О нас{% endblock %}
+
+
+{% block extra_css %}
+<style>
+    body {
+        background: #f8f9fa !important;
+    }
+
+    main {
+        background: #f8f9fa;
+        padding: 50px 20px;
+        min-height: calc(100vh - 100px);
+    }
+
+    .order-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+/* Анимация смены заголовка */
+.header-success {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.5s ease;
+}
+/* Анимация смены заголовка */
+.header-success {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.5s ease;
+}
+
+.header-success h1 {
+    color: #28a745;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+.header-success p {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.success-icon {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    line-height: 60px;
+    font-size: 30px;
+    margin-bottom: 20px;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.header-success h1 {
+    color: #28a745;
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+.header-success p {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.success-icon {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    line-height: 60px;
+    font-size: 30px;
+    margin-bottom: 20px;
+    animation: scaleIn 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+    .order-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .order-header h1 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 2.2rem;
+    }
+
+    .order-header p {
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #2c3e50;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    label .required {
+        color: #dc3545;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border 0.3s;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: #16a085;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+    }
+
+    /* Стили для ошибок */
+    .error {
+        border-color: #dc3545 !important;
+        background-color: #fff5f5;
+    }
+
+    .error-message {
+        color: #dc3545;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        display: none;
+    }
+
+    .error-message.show {
+        display: block;
+    }
+
+    /* Стили для успешного заполнения */
+    .success {
+        border-color: #28a745 !important;
+    }
+
+    .optional-label {
+        font-weight: normal;
+        color: #6c757d;
+        font-size: 0.9rem;
+        margin-left: 5px;
+    }
+
+    .submit-btn {
+        background: #16a085;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 20px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .submit-btn:hover {
+        background: #138a72;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(22, 160, 133, 0.3);
+    }
+
+    .submit-btn:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Сообщение об успехе */
+    .success-message {
+        display: none;
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: center;
+        margin-top: 30px;
+        color: #155724;
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-message h3 {
+        color: #155724;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+    .order-number {
+        background: #155724;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .order-container {
+            padding: 25px 20px;
+            margin: 0 10px;
+        }
+
+        .order-header h1 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="order-container">
+<!-- Сообщение об успехе -->
+    <div id="successMessage" class="success-message" style="display: block">
+        <h3>✅ Заказ успешно оформлен!</h3>
+        <p>Спасибо за ваш заказ! Мы получили вашу заявку и свяжемся с вами в течение 24 часов.</p>
+        <p style="margin: 20px 0;">
+            Номер вашего заказа: <span id="orderNumber" class="order-number">{{number}}</span>
+        </p>
+        <p>Для ускорения связи вы можете написать нам напрямую:</p>
+        <div style="margin: 20px 0;">
+            <a href="https://t.me/Cart00nTG" target="_blank"
+               style="background: #0088cc; color: white; padding: 10px 25px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fab fa-telegram"></i> Написать в Telegram
+            </a>
+        </div>
+        <p>
+            <a href="/" style="color: #16a085; text-decoration: none; font-weight: 500;">
+                <i class="fas fa-arrow-left"></i> Вернуться на главную страницу
+            </a>
+        </p>
+    </div>
+    </div>
+{% endblock %}
+
+
+
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('orderForm');
+    const successMessage = document.getElementById('successMessage');
+    const orderNumber = document.getElementById('orderNumber');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Регулярные выражения для валидации
+    const patterns = {
+        phone: /^(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/,
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        telegram: /^[a-zA-Z0-9_]{5,32}$/,
+        name: /^[a-zA-Zа-яА-ЯёЁ\s\-]{2,50}$/
+    };
+
+    // Функция показа ошибки
+    function showError(fieldId, messageId, show = true) {
+        const field = document.getElementById(fieldId);
+        const error = document.getElementById(messageId);
+
+        if (show) {
+            field.classList.add('error');
+            field.classList.remove('success');
+            error.classList.add('show');
+        } else {
+            field.classList.remove('error');
+            error.classList.remove('show');
+
+            // Если поле заполнено правильно, показываем успех
+            if (field.value.trim()) {
+                field.classList.add('success');
+            }
+        }
+    }
+
+    // Валидация отдельных полей
+    function validateField(fieldId, pattern = null, minLength = null) {
+        const field = document.getElementById(fieldId);
+        const value = field.value.trim();
+        const isRequired = field.hasAttribute('required');
+
+        // Если поле необязательное и пустое - пропускаем
+        if (!isRequired && !value) {
+            showError(fieldId, `${fieldId}-error`, false);
+            return true;
+        }
+
+        // Проверка минимальной длины
+        if (minLength && value.length < minLength) {
+            showError(fieldId, `${fieldId}-error`, true);
+            return false;
+        }
+
+        // Проверка по регулярному выражению
+        if (pattern && !pattern.test(value)) {
+            showError(fieldId, `${fieldId}-error`, true);
+            return false;
+        }
+
+        // Проверка email
+        if (fieldId === 'email' && !patterns.email.test(value)) {
+            showError(fieldId, `${fieldId}-error`, true);
+            return false;
+        }
+
+        // Проверка выпадающего списка
+        if (field.tagName === 'SELECT' && !value) {
+            showError(fieldId, `${fieldId}-error`, true);
+            return false;
+        }
+
+        // Все проверки пройдены
+        showError(fieldId, `${fieldId}-error`, false);
+        return true;
+    }
+
+    // Валидация всей формы
+    function validateForm() {
+        let isValid = true;
+
+        // Проверяем каждое поле
+        if (!validateField('topic')) isValid = false;
+        if (!validateField('name', patterns.name, 2)) isValid = false;
+        if (!validateField('email', patterns.email)) isValid = false;
+        if (!validateField('phone', patterns.phone)) isValid = false;
+        if (!validateField('telegram', patterns.telegram)) isValid = false;
+        if (!validateField('message', null, 20)) isValid = false;
+
+        return isValid;
+    }
+
+    // События ввода для live-валидации
+    const fields = ['topic', 'name', 'email', 'phone', 'telegram', 'message'];
+    fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.addEventListener('blur', function() {
+                if (fieldId === 'phone') {
+                    validateField(fieldId, patterns.phone);
+                } else if (fieldId === 'email') {
+                    validateField(fieldId, patterns.email);
+                } else if (fieldId === 'telegram') {
+                    validateField(fieldId, patterns.telegram);
+                } else if (fieldId === 'name') {
+                    validateField(fieldId, patterns.name, 2);
+                } else if (fieldId === 'message') {
+                    validateField(fieldId, null, 20);
+                } else {
+                    validateField(fieldId);
+                }
+            });
+
+            field.addEventListener('input', function() {
+                // Убираем ошибку при вводе
+                showError(fieldId, `${fieldId}-error`, false);
+            });
+        }
+    });
+
+    // Обработчик отправки формы
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Валидируем форму
+        if (!validateForm()) {
+            // Прокрутка к первой ошибке
+            const firstError = document.querySelector('.error');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstError.focus();
+            }
+            return;
+        }
+
+        // Блокируем кнопку отправки
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+
+        // Собираем данные формы
+        const formData = {
+            topic: document.getElementById('topic').value,
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value || 'Не указан',
+            telegram: document.getElementById('telegram').value ?
+                     '@' + document.getElementById('telegram').value : 'Не указан',
+            message: document.getElementById('message').value,
+            timestamp: new Date().toISOString()
+        };
+
+        // Генерируем номер заказа
+        const randomNum = 'EMP-' + Date.now().toString().slice(-8);
+        orderNumber.textContent = randomNum;
+
+        // Имитация отправки на сервер (3 секунды)
+        setTimeout(function() {
+    // Меняем заголовок на "Готово!"
+    const orderHeader = document.getElementById('orderHeader');
+    const headerTitle = document.getElementById('headerTitle');
+    const headerSubtitle = document.getElementById('headerSubtitle');
+
+    // Добавляем класс для анимации
+    orderHeader.classList.add('header-success');
+
+    // Меняем содержимое заголовка
+    orderHeader.innerHTML = `
+        <div class="success-icon">✓</div>
+        <h1>Готово!</h1>
+        <p>Ваш заказ успешно оформлен. Мы свяжемся с вами в течение 24 часов.</p>
+    `;
+
+    // Показываем сообщение об успехе
+    form.style.display = 'none';
+    successMessage.style.display = 'block';
+
+    // Прокрутка к сообщению
+    successMessage.scrollIntoView({ behavior: 'smooth' });
+
+    // Логируем данные
+    console.log('Форма отправлена:', formData);
+    console.log('Номер заказа:', randomNum);
+}, 2000);
+    });
+
+    // Автоматическое форматирование телефона
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+
+            if (value.startsWith('8')) {
+                value = '+7' + value.slice(1);
+            }
+
+            if (value.length > 1) {
+                let formatted = '+7';
+
+                if (value.length > 1) {
+                    formatted += ' (' + value.slice(1, 4);
+                }
+                if (value.length >= 5) {
+                    formatted += ') ' + value.slice(4, 7);
+                }
+                if (value.length >= 8) {
+                    formatted += '-' + value.slice(7, 9);
+                }
+                if (value.length >= 10) {
+                    formatted += '-' + value.slice(9, 11);
+                }
+
+                e.target.value = formatted;
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
