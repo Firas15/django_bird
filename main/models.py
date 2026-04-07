@@ -36,4 +36,4 @@ class Order(models.Model):
     phone =models.CharField(max_length=50,verbose_name="Номер телефона")
     tg_nick =models.CharField(max_length=200,verbose_name="Телеграмм")
     descp_order =models.TextField(verbose_name="Описание заказа")
-    data =models.DateTimeField(auto_now_add= True, verbose_name="Имя клиента")
+    data =models.DateTimeField(auto_now_add= True, verbose_name="Дата заказа")
