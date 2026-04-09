@@ -42,6 +42,11 @@
 
         {% if user.is_authenticated %}
         <li>
+            <a href="{% url 'profile' %}" class="{% if request.path == '/profile/' %}active{% endif %}">
+                <i class="fa-solid fa-user"></i> Профиль
+            </a>
+        </li>
+        <li>
             <a href="/logout/" style="background-color: #DC143C;">
                 <i class="fa-regular fa-square-caret-left"></i> Выйти
             </a>
@@ -58,7 +63,8 @@
 
 {% if user.is_authenticated %}
 <div class="profile_panel"  >
-    Добро пожаловать, {{user.username}}
+    <a href="/profile">Добро пожаловать, {{user.username}} </a>
+
 </div>
 {% endif %}
 

@@ -10,4 +10,8 @@ class PortfolioAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("name","phone","data")
+    list_display = ("name","phone","data","get_id")
+
+    def get_id(self,obj):
+        return obj.id
+    get_id.short_description = "Номер заказа"

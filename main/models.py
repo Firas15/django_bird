@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 class Category(models.Model):
@@ -37,3 +38,10 @@ class Order(models.Model):
     tg_nick =models.CharField(max_length=200,verbose_name="Телеграмм")
     descp_order =models.TextField(verbose_name="Описание заказа")
     data =models.DateTimeField(auto_now_add= True, verbose_name="Дата заказа")
+    user = models.ForeignKey(User,on_delete=models.CASCADE,default=None,null=True)
+
+
+
+
+    def __str__(self):
+        return f"Заказ № {self.id}"

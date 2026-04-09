@@ -1,5 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Portfolio, Category
+from .models import Portfolio, Category, Order
 from django.http import JsonResponse
 from django.contrib.auth import logout, login
 from django.contrib import messages
@@ -14,7 +15,10 @@ def index(request):
 
 def order_form(request):
     if request.method == "POST":
-        form = Order_form(request.POST)
+        form = Order_form(
+            request.POST,
+            user=request.user if request.user.is_authenticated else None
+        )
         if form.is_valid():
             order = form.save()
             return redirect(f"/accept_order/{order.id}")
@@ -22,6 +26,11 @@ def order_form(request):
         form = Order_form()
 
         return render(request, 'order-form.html', {'form': form})
+
+@login_required
+def profile(request):
+    orders = Order.objects.filter(user=request.user)
+    return render(request,'profile.html',{"orders":orders})
 
 
 def about(request):
@@ -37,7 +46,7 @@ def login_our(request):
             messages.success(request, f'Добро пожаловать, {user.username}!')
             return redirect('home')
         messages.error(request, 'Неверный логин или пароль.')
-        return redirect('home')
+        return redirect('login')
     return render(request, 'login.html', {'form': AuthenticationForm()})
 
 def accept_order(request, number):

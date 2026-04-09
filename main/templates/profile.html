@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<main>
+<section class="intro">
+<style>.profile_panel {display: none}</style>
+<div class="profile-container">
+    <h1>Ваша персональная страница, {{ user.username }}.</h1>
+    <h2>На этой странице собрана информация по истории ваших заказов.</h2>
+</div>
+</section>
+</main>
+{% endblock %}
