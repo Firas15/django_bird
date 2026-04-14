@@ -8,6 +8,52 @@
 <div class="profile-container">
     <h1>Ваша персональная страница, {{ user.username }}.</h1>
     <h2>На этой странице собрана информация по истории ваших заказов.</h2>
+    {% if orders %}
+
+    <table class="table table-bordered w-100 text-break">
+        <tr class="table-success">
+            <td style="width:4%">
+                <b>Номер заказа</b>
+            </td>
+            <td style="width:10%">
+                <b>Тема</b>
+            </td>
+            <td style="width:20%" >
+                <b>Описание заказа</b>
+            </td>
+
+            <td style="width:10%">
+                <b>Статус</b>
+            </td>
+
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>
+                <b>{{order.id}}</b>
+            </td>
+            <td>
+                <b>{{order.get_theme_display}}</b>
+            </td>
+            <td>
+                <b>{{order.descp_order}}</b>
+            </td>
+            <td {% if order.status == 'obrabotka' %} class="bg-warning" {% endif %}
+            {% if order.status == 'accept' %} class="bg-info" {% endif %}
+            {% if order.status == 'ready' %} class="bg-success" {% endif %}
+            {% if order.status == 'done' %} class="bg-secondary" {% endif %}>
+                <b>{{order.get_status_display}}</b>
+            </td>
+
+        </tr>
+        {% endfor %}
+
+
+
+    </table>
+    {% else %}
+    <h2>У вас пока нет заказов</h2>
+    {% endif %}
 </div>
 </section>
 </main>

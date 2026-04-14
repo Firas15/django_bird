@@ -31,6 +31,14 @@ class Order(models.Model):
         ('consultation', 'Консультация'),
         ('other', 'Другое'),
     ]
+
+    status_ = [
+        ('obrabotka','В обработке'),
+        ('accept', 'Принят'),
+        ('ready','Готов'),
+        ('done','Завершён')
+    ]
+
     theme = models.CharField(max_length=200,choices=choice,verbose_name="Тема заказа")
     name =models.CharField(max_length=200,verbose_name="Имя клиента")
     email =models.EmailField(max_length=100,verbose_name="Email")
@@ -39,6 +47,8 @@ class Order(models.Model):
     descp_order =models.TextField(verbose_name="Описание заказа")
     data =models.DateTimeField(auto_now_add= True, verbose_name="Дата заказа")
     user = models.ForeignKey(User,on_delete=models.CASCADE,default=None,null=True)
+    status = models.CharField(max_length=200,choices=status_,verbose_name="Статус заказа",default='obrabotka')
+
 
 
 
