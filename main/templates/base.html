@@ -62,10 +62,16 @@
 </aside>
 
 {% if user.is_authenticated %}
-<div class="profile_panel"  >
-    <a href="/profile" class="profile-link" >Добро пожаловать, {{user.username}} </a>
-
-</div>
+<a href="{% url 'profile' %}" class="profile_panel{% if request.path == '/profile/' %} profile_panel--hidden{% endif %}" aria-label="Перейти в профиль">
+    <span class="profile_panel__avatar" aria-hidden="true">
+        <i class="fa-solid fa-user"></i>
+    </span>
+    <span class="profile_panel__meta">
+        <span class="profile_panel__label">Добро пожаловать</span>
+        <span class="profile_panel__name">{{ user.username }}</span>
+    </span>
+    <i class="fa-solid fa-chevron-right profile_panel__chevron" aria-hidden="true"></i>
+</a>
 {% endif %}
 
 <!-- Toast уведомления -->
