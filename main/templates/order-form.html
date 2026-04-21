@@ -288,86 +288,7 @@
             для заполнения</p>
         {% endif %}
     </div>
-    <!--
-        <form id="orderForm" novalidate>
 
-            <div class="form-group">
-                <label for="topic">Тема обращения <span class="required">*</span></label>
-                <select id="topic" name="topic" required>
-                    <option value="" disabled selected>Выберите тему обращения</option>
-                    <option value="photo">Вышивка по фотографии</option>
-                    <option value="personal">Персональный дизайн вышивки</option>
-                    <option value="restoration">Восстановление одежды</option>
-                    <option value="consultation">Консультация</option>
-                    <option value="other">Другое</option>
-                </select>
-                <div class="error-message" id="topic-error">Пожалуйста, выберите тему обращения</div>
-            </div>
-
-             Имя
-            <div class="form-group">
-                <label for="name">Ваше имя <span class="required">*</span></label>
-                <input type="text" id="name" name="name" required
-                       placeholder="Иван Иванов"
-                       minlength="2"
-                       maxlength="50">
-                <div class="error-message" id="name-error">Имя должно содержать от 2 до 50 символов</div>
-            </div>
-
-             Email
-            <div class="form-group">
-                <label for="email">Email <span class="required">*</span></label>
-                <input type="email" id="email" name="email" required
-                       placeholder="example@email.com">
-                <div class="error-message" id="email-error">Введите корректный email адрес</div>
-            </div>
-
-             Телефон (опционально)
-            <div class="form-group">
-                <label for="phone">Номер телефона <span class="optional-label">(опционально)</span></label>
-                <input type="tel" id="phone" name="phone"
-                       placeholder="+7 (999) 123-45-67"
-                       pattern="^(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$">
-                <div class="error-message" id="phone-error">Введите номер в формате: +7 (999) 123-45-67 или 89991234567</div>
-            </div>
-
-             Telegram ник (опционально)
-            <div class="form-group">
-                <label for="telegram">Telegram никнейм <span class="optional-label">(опционально)</span></label>
-                <div style="display: flex; align-items: center;">
-                    <span style="background: #0088cc; color: white; padding: 12px 15px; border-radius: 8px 0 0 8px; border: 1px solid #ddd; border-right: none;">@</span>
-                    <input type="text" id="telegram" name="telegram"
-                           placeholder="username"
-                           style="border-radius: 0 8px 8px 0; flex: 1;"
-                           pattern="^[a-zA-Z0-9_]{5,32}$">
-                </div>
-                <div class="error-message" id="telegram-error">Telegram ник должен содержать 5-32 символа (буквы, цифры, подчеркивание)</div>
-            </div>
-
-             Описание заказа
-            <div class="form-group">
-                <label for="message">Описание заказа <span class="required">*</span></label>
-                <textarea id="message" name="message" rows="6" required
-                          placeholder="Опишите детали вашего заказа:
-    • Какой дизайн вы хотите?
-    • Размер вышивки
-    • Расположение на одежде
-    • Особые пожелания
-    • Другие детали..."></textarea>
-                <div class="error-message" id="message-error">Пожалуйста, опишите ваш заказ (минимум 20 символов)</div>
-            </div>
-
-            <div class="form-group" style="text-align: center; margin-top: 30px;">
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i> Отправить заказ
-                </button>
-                <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">
-                    Нажимая кнопку, вы соглашаетесь на обработку персональных данных
-                </p>
-            </div>
-        </form>
-
-       -->
     {% if user.is_authenticated %}
     <form method="post">
         {% csrf_token %}
@@ -398,6 +319,9 @@
     {% endif %}
 
 </div>
+<div style="margin-top: 36px">
+        {% include "include/footer.html" %}
+    </div>
 {% endblock %}
 
 {% block extra_js %}

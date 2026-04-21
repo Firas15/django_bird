@@ -10,7 +10,7 @@ class PortfolioAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("name","phone","data","get_id")
+    list_display = ("name","phone","data","status","get_id")
 
     def get_id(self,obj):
         return obj.id
