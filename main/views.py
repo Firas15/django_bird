@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 
 
 def index(request):
-    send_mail("Тестовое письмо","Пришел заказ",None,["vishivka2026@yandex.ru"],fail_silently=False)
+    #send_mail("Тестовое письмо","Пришел заказ",None,["vishivka2026@yandex.ru"],fail_silently=False)
     categories = Category.objects.all().order_by('-order')
     return render(request, 'index.html', {"categories": categories})
 
