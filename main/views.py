@@ -10,7 +10,6 @@ from django.core.mail import send_mail
 
 
 def index(request):
-    ##send_mail("Тестовое письмо","Пришел заказ",None,["vishivka2026@yandex.ru"],fail_silently=False)
     categories = Category.objects.all().order_by('-order')
     return render(request, 'index.html', {"categories": categories})
 
@@ -23,7 +22,11 @@ def order_form(request):
         )
         if form.is_valid():
             order = form.save()
-            return redirect(f"/accept_order/{order.id}")
+            order_id = order.id
+            send_mail(f"Новый заказ: {order_id}", f"Пришел заказ от пользователя {order.user.username}.\nИмя - {order.name}\nКатегория - {order.get_theme_display()}\n"
+                                                  f"Телеграм - {order.tg_nick} \nТелефон - {order.phone}\nОписание заказа: {order.descp_order} ", None, ["vishivka.order@gmail.com"], fail_silently=False)
+
+            return redirect(f"/accept_order/{order_id}")
     else:
         form = Order_form()
 
